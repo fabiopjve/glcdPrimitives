@@ -124,39 +124,6 @@ void glcd_printCharXY(uint16_t x, uint16_t y, char c)
 }
 
 /*
- * Function     : glcd_printCharXY_TEST
- * Description  : draw a character using current font on screen
- *                THIS IS A DEMONSTRATION FUNCTION ONLY!!!!!!!!
- *                ITS PURPOSE IS TO DEMONSTRATE SHARED OBJECTS
- *                ISSUES ON MULTI-THREAD SYSTEMS !!!!!!!
- * Input        : uint16_t x, uint16_t y, char c
- * Returns      : void
- */
-void glcd_printCharXY_TEST(uint16_t x, uint16_t y, char c)
-{
-    uint16_t fbX = 0, fbY = y;
-    static uint16_t tempX = 0, tempY = 0;
-    uint16_t bitIndex = (4 +(c - currentFont.offset)*(((uint16_t)currentFont.x_size * (uint16_t)currentFont.y_size)/8)) * 8;
-    for (tempY = 0; tempY<currentFont.y_size; tempY++) {
-        fbX = x;
-        for (tempX = 0; tempX<currentFont.x_size; tempX++) {
-            if (currentFont.font[bitIndex / 8] & (1<<(7-bitIndex % 8))) {
-                // pixel font is on
-                *(currentFrameBuffer + fbX + fbY*GLCDCOLS) = foregroundColor;
-            } else {
-                // pixel font is off
-                if (!transparentMode) {
-                    *(currentFrameBuffer + fbX + fbY*GLCDCOLS) = backgroundColor;
-                }
-            }
-            fbX++;
-            bitIndex++;
-        }
-        fbY++;
-    }
-}
-
-/*
  * Function     : glcd_printStringXY
  * Description  : draw a string using current font and current
  *                foreground color on screen

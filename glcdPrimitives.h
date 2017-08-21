@@ -40,7 +40,6 @@ void glcd_setForegroundColor(uint16_t color);
 void glcd_setBackgroundColor(uint16_t color);
 void glcd_fillScreen(uint16_t color);
 void glcd_printCharXY(uint16_t x, uint16_t y, char c);
-void glcd_printCharXY_TEST(uint16_t x, uint16_t y, char c);
 void glcd_printStringXY(uint16_t x, uint16_t y, char *string);
 void glcd_plotPixel(uint16_t x, uint16_t y, uint16_t color);
 void glcd_plotLine(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
